@@ -1,6 +1,10 @@
 # 1. file beolvasása () -> list of string
 def read_file(file_name: str) -> list:
-    pass
+    answers = []
+    with open(file_name) as f:
+        for line in f:
+            answers.append(line.strip())
+    return answers
 
 # 1.5 normalizálás (list of string) -> list of sting
 def normalize(vote: str) -> list:
@@ -19,7 +23,8 @@ def print_result(winner: tuple) -> None:
     pass
 
 def main():
-    pass
+    x = read_file('votes.txt')
+    print(x)
     
 
 
