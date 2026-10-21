@@ -12,7 +12,10 @@ def normalize(votes: str) -> list:
 
 # 2. szavazatok számlálása (list of string) -> dict város: db
 def count_votes(votes: list) -> dict:
-    pass
+    counts = {}
+    for vote in votes:
+        counts[vote] = counts.get(vote, 0) + 1
+    return counts
 
 # 3. ki nyert ? (dict) -> (város, db)
 def find_winner(counts: dict) -> tuple:
@@ -25,8 +28,9 @@ def print_result(winner: tuple) -> None:
 def main():
     votes = read_file('votes.txt')
     normalized_votes = normalize(votes)
+    counts = count_votes(normalized_votes)
     
-    print(normalized_votes)
+    print(counts)
 
 
 if __name__ == "__main__":
