@@ -17,21 +17,30 @@ def count_votes(votes: list) -> dict:
         counts[vote] = counts.get(vote, 0) + 1
     return counts
 
-# 3. ki nyert ? (dict) -> (város, db)
-def find_winner(counts: dict) -> tuple:
-    pass
+# 3. ki nyert ? (dict) -> dict
+def find_winner(counts: dict) -> dict:
+    winner = {
+        'city': None,
+        'counts': 0
+    }
+    for city in counts:
+        if counts[city] > winner['counts']:
+            winner['city'] = city
+            winner['counts'] = counts[city]
+    return winner
+    
 
 # 4. kiíratás (város, db) -> None
-def print_result(winner: tuple) -> None:
-    pass
+def print_result(winner: dict) -> None:
+    print(f'Győztes: {winner['city']} ({winner['counts']} szavazat)')
 
 def main():
     votes = read_file('votes.txt')
     normalized_votes = normalize(votes)
     counts = count_votes(normalized_votes)
+    winner = find_winner(counts)
+    print_result(winner)
     
-    print(counts)
-
 
 if __name__ == "__main__":
     main()
