@@ -19,21 +19,27 @@ def count_votes(votes: list) -> dict:
 
 # 3. ki nyert ? (dict) -> dict
 def find_winner(counts: dict) -> dict:
-    winner = {
-        'city': None,
-        'counts': 0
-    }
+    max_votes = max(counts.values())
+    cities = []
+    
     for city in counts:
-        if counts[city] > winner['counts']:
-            winner['city'] = city
-            winner['counts'] = counts[city]
-    return winner
+        if counts[city] == max_votes:
+            cities.append(city)
+    
+    return {
+        'cities':cities,
+        'votes': max_votes
+    }
     
 
 # 4. kiíratás (város, db) -> None
 def print_result(winner: dict) -> None:
-    print(f'Győztes: {winner['city']} ({winner['counts']} szavazat)')
-
+    winner_len = len(winner['cities'])
+    if(winner_len == 1):
+        print(f'Győztes: {winner['city']} ({winner['counts']} szavazat)')
+    else:
+        print(f'Nincs győztes! Városok {winner['votes']} szavazatot kaptak: {winner['cities']}')
+    
 def main():
     votes = read_file('votes.txt')
     normalized_votes = normalize(votes)
