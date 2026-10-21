@@ -7,8 +7,8 @@ def read_file(file_name: str) -> list:
     return answers
 
 # 1.5 normalizálás (list of string) -> list of sting
-def normalize(vote: str) -> list:
-    pass
+def normalize(votes: str) -> list:
+    return [vote.lower() for vote in votes]
 
 # 2. szavazatok számlálása (list of string) -> dict város: db
 def count_votes(votes: list) -> dict:
@@ -23,9 +23,10 @@ def print_result(winner: tuple) -> None:
     pass
 
 def main():
-    x = read_file('votes.txt')
-    print(x)
+    votes = read_file('votes.txt')
+    normalized_votes = normalize(votes)
     
+    print(normalized_votes)
 
 
 if __name__ == "__main__":
